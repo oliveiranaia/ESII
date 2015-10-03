@@ -1,0 +1,40 @@
+package ESII;
+
+public class CalculadoraIMC {
+    
+    Pessoa pessoa;
+    double imc;
+    
+    public CalculadoraIMC() {
+        
+    }
+    
+    public void init(Pessoa p) {
+        pessoa = p;
+    }
+    
+    public double calcula() {
+        imc = pessoa.getPeso() / (Math.pow(pessoa.getAltura(), 2));
+        return imc;
+    }
+    
+    public String avalia() {
+        String resultado = "Você está...";
+        if (imc <= 18.5) {
+            resultado += " abaixo do peso.";
+        } else if (imc > 18.5 && imc <= 25.0) {
+            resultado += " no peso ideal. Parabéns!";
+        } else if (imc > 25.0 && imc <= 30.0) {
+            resultado += " levemente acima do peso.";
+        } else if (imc > 30.0 && imc <= 35) {
+            resultado += " com obesidade grau I.";
+        } else if (imc > 35 && imc <= 40) {
+            resultado += " com obesidade grau II (severa).";
+        } else if (imc > 40) {
+            resultado += " com obesidade grau III (mórbida).";
+        }
+        
+        return resultado;
+    }
+    
+}

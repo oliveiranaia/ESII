@@ -1,0 +1,47 @@
+package ESII.app;
+
+import ESII.CalculadoraIMC;
+import ESII.Pessoa;
+import java.util.Scanner;
+
+public class App {
+
+    private Pessoa pessoa;
+    float imc;
+
+    public static void main(String args[]) {
+        Scanner entrada = new Scanner(System.in);
+    
+        System.out.println("Digite M para Masculino ou F para Feminino: ");
+        String sex = entrada.nextLine();
+        System.out.print("Digite a idade: ");
+        int idade = entrada.nextInt();
+        System.out.print("Digite o Peso (XXX,XX): ");
+        double peso = entrada.nextDouble();
+        System.out.print("Digite a Altura (X,XX): ");
+        double altura = entrada.nextDouble();
+        Pessoa.Sexo sexo;
+        
+        switch(sex) {
+            case "M":
+                sexo = Pessoa.Sexo.M;
+                break;
+            case "F":
+                sexo = Pessoa.Sexo.F;
+                break;
+            default:
+                sexo = Pessoa.Sexo.M;
+        }
+        
+        Pessoa pessoa = new Pessoa(idade, peso, altura, sexo);  //instancia do objeto Pessoa
+        CalculadoraIMC calculadora = new CalculadoraIMC();      //instância do objeto CalculadoraIMC
+        calculadora.init(pessoa);
+        double resultado = calculadora.calcula();         //chamada do método calcula que retorna o IMC
+        resultado = (double)Math.round(resultado * 100d) / 100d;//arredonda valor double para 2 casas decimais
+        
+        System.out.println("Seu IMC é: " + resultado);          //imprime resultado
+
+        String avaliacao = calculadora.avalia();
+        System.out.println(avaliacao);
+    }
+}
